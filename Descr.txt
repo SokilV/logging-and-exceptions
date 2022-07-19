@@ -132,6 +132,9 @@ https://logging.apache.org/log4j/2.x/faq.html
 history
 https://habr.com/ru/post/113145/
 
+Java 
+https://www.loggly.com/ultimate-guide/java-logging-basics/
+
 logging approach
 https://habr.com/ru/post/98638/
 
@@ -139,8 +142,6 @@ Spring boot logging
 https://docs.spring.io/spring-boot/docs/current/reference/html/howto.html#howto.logging
 https://coralogix.com/blog/spring-boot-logging-best-practices-guide/
 https://www.baeldung.com/spring-boot-logging
-
-
 https://mkyong.com/spring-boot/spring-boot-slf4j-logging-example/
 https://mkyong.com/spring-boot/spring-boot-log4j-2-example/
 
