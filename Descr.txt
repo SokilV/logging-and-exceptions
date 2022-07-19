@@ -22,31 +22,73 @@ Plan
          logback                                          -  modern
          AND .... millions of OWN solutions )
          
-         SLF4J - Wrapper, SLF4J API                       - modern
+         SLF4J - Wrapper, SLF4J API                       -  modern
 
 3. Log system requirements
     1. fail-safe  principle
     
     safe to use (logger would not throw an unhandled exception because it can crash the app or change logic)
+
        //....
        if(isMyPasswordCorrect()){
            log.info("Login is incorrect"); //in case exception in the method we got not initialized context for authwnticated user
            init();
        }
        // proceed to work....
-    2. configure ability 
-    3. minimum performance impact
+
+    2. configure ability (Formast, Data stores, log levels, )
+    3. Thread-safety
+    4. minimum performance impact, async logging
+    5.  TRACE, DEBUG, INFO, WARN, ERROR levels
+    
        ......
-    4. Should do work and don't produce a lot of troubles... 
+    n. Should do work and don't produce a lot of troubles... 
 
 
 4. Approaches to logging
 
+   1. Log all errors
+   2. log with correct logging level
+   
+             store(String s) {
+             
+                log.info("opening session");
+				openSession();
+                log.info("connection is oppened")
+
+
+                log.info("start storing")
+                try{
+					store();
+                }
+
+				closeSession();
+                log.info("close session")
+             }
+
+   3. Log exceptions with stack trace
+
+
    Anti-patterns
+       log.debug("Temp variavle", ex.ToString());
+       log.debug(ex.Message());
+
+       //LOG level is INFO
        log.debug( "Message", instance.someLongTimeMethod() );
-       log.info( "Message" + instance.someText() + " " + instance.someText() );
+
+       log.debug( "Message" + instance.someText() + " " + instance.someText() );
+
+       log.debug( "Message {0} {1}", instance.someText(), instance.someText() );
+       
+       instance.someText() > "XXX"
+       
+       "Message  XXX XXX" 
+
+
        log.info( String.format("Some %s, %s", "test1", "test2") );
   
+       try { … } catch (Exception ex) { Log(ex); throw; }
+       
        https://logging.apache.org/log4j/1.2/faq.html#a2.3
   
 4. Modern loggers
@@ -61,7 +103,7 @@ Plan
    
 4. Issues with logging
      - configuration
-     - performance degradation (I/O operations, CPU usage, ) 
+     - performance degradation (I/O operations, CPU usage) 
          The most critical thing is filtering(by package and category) and formatting takes 90% of CPU time
          I/O - 10%           
      - too big log files (logs rotation)
@@ -89,6 +131,9 @@ https://logging.apache.org/log4j/2.x/faq.html
 
 history
 https://habr.com/ru/post/113145/
+
+logging approach
+https://habr.com/ru/post/98638/
 
 Spring boot logging
 https://docs.spring.io/spring-boot/docs/current/reference/html/howto.html#howto.logging
