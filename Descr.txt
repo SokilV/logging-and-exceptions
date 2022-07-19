@@ -1,0 +1,100 @@
+Plan
+
+1. A problem - Why wee need logging?
+
+ - store some traces(labels) to recover code execution history facts (with out debuger)
+ - sometime we can not debug some functionality - (ex. production, multithreading, fast operations)
+ - profiling - execution time analizys
+ - error handling - it allows to store error and proceed work to fix
+ 
+2. History
+   - standart outuput - println() 
+   - outuput into a file /var/logs/myLog.log
+   - libraries 
+         IBM log4j                                           - Modern
+           --killer feature is log levels and  TRACE, DEBUG, INFO, WARN, ERROR, and FATAL  
+           --categorization by the package(now it is the de facto standard).
+                 enable messages from org.hibernate 
+                 suspend form org.hibernate.type   
+         JSR47 - java.util.logging(JUL)  included into JDK  -  Legacy
+         commons-logging (JCL = Jakarta Commons Logging)  -  Legacy
+         Jboss Logging                                    -  Legacy
+         logback                                          -  modern
+         AND .... millions of OWN solutions )
+         
+         SLF4J - Wrapper, SLF4J API                       - modern
+
+3. Log system requirements
+    1. fail-safe  principle
+    
+    safe to use (logger would not throw an unhandled exception because it can crash the app or change logic)
+       //....
+       if(isMyPasswordCorrect()){
+           log.info("Login is incorrect"); //in case exception in the method we got not initialized context for authwnticated user
+           init();
+       }
+       // proceed to work....
+    2. configure ability 
+    3. minimum performance impact
+       ......
+    4. Should do work and don't produce a lot of troubles... 
+
+
+4. Approaches to logging
+
+   Anti-patterns
+       log.debug( "Message", instance.someLongTimeMethod() );
+       log.info( "Message" + instance.someText() + " " + instance.someText() );
+       log.info( String.format("Some %s, %s", "test1", "test2") );
+  
+       https://logging.apache.org/log4j/1.2/faq.html#a2.3
+  
+4. Modern loggers
+
+   a) https://www.marcobehler.com/guides/java-logging
+   b) selecting 
+   
+   
+
+5. Exception logging
+
+   
+4. Issues with logging
+     - configuration
+     - performance degradation (I/O operations, CPU usage, ) 
+         The most critical thing is filtering(by package and category) and formatting takes 90% of CPU time
+         I/O - 10%           
+     - too big log files (logs rotation)
+
+
+5. Hidden threat
+     Log4Shell case
+
+5. Modern approach - ELK Stack
+    - How does it work?
+        create an appender
+        log a message
+        agent upload data to Elastic search
+    - Examples
+
+6. @ControllerAdvice    
+https://zetcode.com/springboot/controlleradvice/
+
+-----------------
+
+Sources:
+
+https://logback.qos.ch/documentation.html
+https://logging.apache.org/log4j/2.x/faq.html
+
+history
+https://habr.com/ru/post/113145/
+
+Spring boot logging
+https://docs.spring.io/spring-boot/docs/current/reference/html/howto.html#howto.logging
+https://coralogix.com/blog/spring-boot-logging-best-practices-guide/
+https://www.baeldung.com/spring-boot-logging
+
+Exceptions
+https://web.archive.org/web/20111204045906/http://www.javaplex.com/blog/understanding-exceptions-in-java/
+http://docs.oracle.com/javase/tutorial/essential/exceptions/throwing.html
