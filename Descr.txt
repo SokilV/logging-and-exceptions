@@ -140,6 +140,10 @@ https://docs.spring.io/spring-boot/docs/current/reference/html/howto.html#howto.
 https://coralogix.com/blog/spring-boot-logging-best-practices-guide/
 https://www.baeldung.com/spring-boot-logging
 
+
+https://mkyong.com/spring-boot/spring-boot-slf4j-logging-example/
+https://mkyong.com/spring-boot/spring-boot-log4j-2-example/
+
 Exceptions
 https://web.archive.org/web/20111204045906/http://www.javaplex.com/blog/understanding-exceptions-in-java/
 http://docs.oracle.com/javase/tutorial/essential/exceptions/throwing.html
